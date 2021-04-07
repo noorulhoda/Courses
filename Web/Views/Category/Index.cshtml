@@ -1,0 +1,95 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<BL.ViewModels.CategoryVM>
+
+@{ ViewBag.Title = "Index Page";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+<section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Category Lists <i class="fa fa-chevron-right"></i></span></p>
+                <h1 class="mb-0 bread">Category Lists</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="sidebar-box bg-white ftco-animate">
+
+                    @using (Html.BeginForm("Index", "Category", FormMethod.Post))
+                    {
+                        <div class="single_product_menu d-flex">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="search"
+                                       aria-describedby="inputGroupPrepend">
+
+                            </div>
+                        </div>
+                        <div class="single_product_menu d-flex">
+                            <input type="submit" name="submit" value="search" class="genric-btn success-border circle" />
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (Model.Count() == 0)
+            {
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-md-6 d-flex align-items-stretch ftco-animate">
+                            <h2>The item you are looking for doesn't exist</h2>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+            else
+            {
+                <div class="col-lg-9">
+                    <div class="row">
+                        @foreach (var cat in Model)
+                        {
+                            <div class="col-md-6 d-flex align-items-stretch ftco-animate">
+                                <div class="project-wrap">
+                                    <a href=@Url.Action("GetCategory", "Category", new { id = cat.ID }) class="img" style="background-image: url(~/Content/images/bg_1.jpg);">
+                                        <span class="price">@cat.title</span>
+                                    </a>
+                                    <div class="text p-4">
+                                        <h3><a href=@Url.Action("GetCategory", "Category", new { id = cat.ID })>@cat.description</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+
+
+            }
+        </div>
+    </div>
+    <div class="col-lg-12">
+
+        <div class="row mt-5">
+            <div class="col">
+                <div class="block-27">
+                    <div class="pageination">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum, search = Request.QueryString["search"] }))
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

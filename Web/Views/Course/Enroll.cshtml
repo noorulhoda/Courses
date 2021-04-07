@@ -1,0 +1,9 @@
+﻿@using BL.ViewModels
+@model CourseVM
+@section scripts{
+    <script>
+        var name = localStorage.getItem("UserName");
+        location.href = '@Url.Action("EnrollStudent", "Course",new { id= Model.ID})?studentName=' + name;
+    </script>
+
+}

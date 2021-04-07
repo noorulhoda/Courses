@@ -1,0 +1,32 @@
+﻿@model BL.ViewModels.CategoryVM
+@{
+    ViewBag.Title = "Add New Category";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("AddNewCategory", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(s => s.title, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(s => s.description, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <input type="file" id="ImageFile" name="ImageFile" />
+        @Html.ValidationMessageFor(s => s.image, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

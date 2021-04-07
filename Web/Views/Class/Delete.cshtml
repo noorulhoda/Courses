@@ -1,0 +1,88 @@
+﻿@model BL.ViewModels.ClassVM
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ClassVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.studentsMinAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentsMinAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studentsMaxAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentsMaxAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studentsGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentsGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.classLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.classLinkPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classLinkPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

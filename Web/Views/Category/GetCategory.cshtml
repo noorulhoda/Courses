@@ -1,0 +1,43 @@
+﻿@model BL.ViewModels.CategoryVM
+
+@{
+    ViewBag.Title = "View";
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("UpdateCategory", "UpdateCategory", new { id = Model.ID }) |
+        @Html.ActionLink("DeleteCategory", "DeleteCategory", new { id = Model.ID }) |
+
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>

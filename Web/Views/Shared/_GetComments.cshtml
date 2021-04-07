@@ -1,0 +1,17 @@
+﻿
+
+@model IEnumerable<BL.ViewModels.CommentVM>
+@using BL.AppServices
+
+@{
+    CommentAppServices commentAppService = new CommentAppServices();
+    AccountAppServices accountAppService = new AccountAppServices();
+}
+
+@foreach (var c in commentAppService.GetAllComment().ToList())
+{
+    <div class="col-md-3 col-lg-2">
+        <h4>@accountAppService.GetNameByID(c.userID)</h4>
+        <p>@c.Content</p>
+    </div>
+}

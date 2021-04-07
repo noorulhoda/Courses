@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<BL.ViewModels.CategoryVM>
+@using BL.AppServices
+
+@{
+    CategoryAppServices categoryAppService = new CategoryAppServices();
+}
+
+@foreach (var cat in categoryAppService.GetAllCategory().Take(6).ToList())
+{
+<div class="col-md-3 col-lg-2">
+  
+
+    <a href=@Url.Action("GetCategory", "Category", new { id = cat.ID }) class="course-category img d-flex align-items-center justify-content-center" style="background-image: url(~/Content/images/work-1.jpg);">
+       <img src="~/Content/@cat.image">
+        <div class="text w-100 text-center">
+            <h3>@cat.title</h3>
+        </div>
+    </a>
+    
+</div>
+
+
+}

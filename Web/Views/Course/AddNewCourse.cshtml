@@ -1,0 +1,55 @@
+﻿@using BL.ViewModels
+@model CourseVM
+
+@{
+    ViewBag.Title = "Add New Course";
+
+}
+
+@using (Html.BeginForm("AddNewCourse", "Course", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(s => s.title, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(s => s.description, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.hours, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.hours, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(s => s.hours, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <input type="file" id="ImageFile" name="ImageFile" />
+        @Html.ValidationMessageFor(s => s.image, null, new { @class = "text-danger" })
+    </div>
+  
+    <div class="form-group">
+        @Html.LabelFor(model => model.Category_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <select class="form-control" id="Category_ID" name="Category_ID">
+            @foreach (CategoryVM Item in ViewBag.cat)
+            {
+                <option value="@Item.ID"> @Item.title</option>
+            }
+
+        </select>@Html.ValidationMessageFor(s => s.Category_ID, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

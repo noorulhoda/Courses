@@ -1,0 +1,82 @@
+﻿@model BL.ViewModels.ClassVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ClassVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.studentsMinAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentsMinAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studentsMaxAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentsMaxAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studentsGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentsGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.classLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.classLinkPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classLinkPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

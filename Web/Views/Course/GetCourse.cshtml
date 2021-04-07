@@ -1,0 +1,108 @@
+﻿@model  BL.ViewModels.CourseVM
+@using BL.AppServices
+@{
+    ViewBag.Title = "View";
+    AccountAppServices accountAppService = new AccountAppServices();
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+        <dd>
+           
+        </dd>
+        <dt>
+            <input type="hidden" value="<script>name</script>"/>
+            <a href=@Url.Content("/Course/Enroll/"+@Model.ID@*+"?studentID="+<script>name</script>*@) class="btn btn-success">Enroll</a>
+        </dt>
+        <dt>
+            User Comments:
+        </dt>
+
+    </dl>
+    <ul id="rev">
+        <br>
+        @foreach (var Item in ViewBag.comments)
+        {
+            <li> @accountAppService.GetNameByID(Item.userID) : @Item.Content</li>
+        }
+    </ul>
+    <div>
+        <input type="hidden" id="id" value="@Model.ID" />
+         Comment:
+        <input id="newRev" type="text" />
+        <button id="btnAddRev">Add review</button>
+    </div>
+
+    @section scripts{
+        <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+        <script src="~/signalr/js"></script>
+        <script>
+            var name;
+            //create proxy
+            var proxy = $.connection.commentHub;
+            $.connection.hub.start().done(
+                function () {
+                    console.log("Connected");
+                    //press RPC from server
+                    $("#btnAddRev").click(function () {
+                        console.log("clicked");
+
+                        var msg = $("#newRev").val();
+                        var id = $("#id").val();
+                       name = localStorage.getItem("UserName");
+                        //Cll server function
+                        proxy.server.newMessage(name, msg, id);
+                        console.log(msg + id);
+                    });
+
+                });
+
+
+            proxy.client.NotifyNewMessage = function (n, m, i) {
+                console.log(i + " " + $("#id").val())
+                if (i == $("#id").val()) {
+                    $("#rev").append("<li>" + n + ":" + m + "</li>");
+                }
+            }
+        </script>
+    }
+
+</div>
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        Html.ActionLink("UpdateCourse", "UpdateCourse", new { id = Model.ID });
+        Html.ActionLink("DeleteCourse", "DeleteCourse", new { id = Model.ID });
+    }
+
+    @Html.ActionLink("Back to List", "Index")
+</p>
